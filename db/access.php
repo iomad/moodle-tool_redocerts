@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package   tool_redocerts
+ * @package   local_report_users
  * @copyright 2021 Derick Turner
  * @author    Derick Turner
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,10 +23,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->release  = '4.5.5 (Build: 20250609)'; // Human-friendly version name
-$plugin->version  = 2025071600;   // The (date) version of this plugin.
-$plugin->requires = 2024100700;   // Requires this Moodle version.
-$plugin->component = 'tool_redocerts'; // Full name of the plugin (used for diagnostics)
-$plugin->dependencies = ['local_iomad' => 2024090401];
-$plugin->supported = [405, 405];
-$plugin->maturity = MATURITY_STABLE;
+$capabilities = array(
+
+    'tool/redocerts:redocertificates' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COMPANY,
+        'archetypes' => array(
+            'clientadministrator' => CAP_ALLOW,
+        ),
+    ),
+);
